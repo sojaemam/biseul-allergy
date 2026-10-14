@@ -89,7 +89,7 @@ if st.button('오늘의 급식 위험도 분석하기', type='primary'):
     res = requests.get(url, params=params)
     data = res.json()
 
-    if 'mealServiceDietInfo' not in data:
+  if 'mealServiceDietInfo' not in data:
             st.info(
                 f"🍽️ {date_input[:4]}년 {date_input[4:6]}월 {date_input[6:]}일은"
                 " 학교 급식이 없는 날(주말/휴일)이거나 아직 식단표가"
@@ -97,8 +97,9 @@ if st.button('오늘의 급식 위험도 분석하기', type='primary'):
                 " 미리 확인해 보세요 😊"
             )
         else:
-           raw_menu = data['mealServiceDietInfo'][1]['row'][0]['DDISH_NM']
-      menu_items = raw_menu.split('<br/>')
+            row = data['mealServiceDietInfo'][1]['row'][0]
+            menu_raw = row['DDISH_NM']
+            allergy_raw = row['NTRT_INFO']
 
       total_risk_score = 0
       menu_cards = []
