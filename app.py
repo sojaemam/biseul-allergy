@@ -94,10 +94,9 @@ if st.button('오늘의 급식 위험도 분석하기', type='primary'):
             )
         else:
             row = data['mealServiceDietInfo'][1]['row'][0]
-            menu_raw = row['DDISH_NM']
-            allergy_raw = row['NTRT_INFO']
+            menu_raw = row.get('DDISH_NM', '')
             
-            # 누락되었던 메뉴 분리 로직 추가 완료
+            # 메뉴 항목 분리
             menu_items = menu_raw.split('<br/>')
             
             total_risk_score = 0
