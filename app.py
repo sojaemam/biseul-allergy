@@ -34,7 +34,23 @@ st.caption(
     '알레르기 반응 강도를 선택하면 개인 맞춤 식단 위험 점수와 교내 실전 식사 가이드를 제공합니다.'
 )
 
-date_input = st.text_input('조회 날짜 (8자리)', value='20260925')
+from datetime import datetime, timedelta
+
+# 오늘 날짜를 구하고 주말일 경우 가장 가까운 평일(금요일)로 자동 설정
+today = datetime.now()
+weekday = today.weekday()  # 월:0 ~ 일:6
+
+if weekday == 5:  # 토요일
+    target_date = today - timedelta(days=1)
+elif weekday == 6:  # 일요일
+    target_date = today - timedelta(days=2)
+else:
+    target_date = today
+
+default_date_str = target_date.strftime('%Y%m%d')
+
+# 날짜 입력창 생성 (자동 계산된 날짜를 기본값으로 지정)
+date_input = st.text_input('조회 날짜 (8자리)', value=default_date_str)
 
 col1, col2 = st.columns(2)
 with col1:
