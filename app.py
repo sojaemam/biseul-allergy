@@ -90,11 +90,14 @@ if st.button('오늘의 급식 위험도 분석하기', type='primary'):
     data = res.json()
 
     if 'mealServiceDietInfo' not in data:
-      st.info(
-          f'{date_input} 날짜의 급식 정보가 없습니다. (주말/휴일이거나 식단 미등록)'
-      )
-    else:
-      raw_menu = data['mealServiceDietInfo'][1]['row'][0]['DDISH_NM']
+            st.info(
+                f"🍽️ {date_input[:4]}년 {date_input[4:6]}월 {date_input[6:]}일은"
+                " 학교 급식이 없는 날(주말/휴일)이거나 아직 식단표가"
+                " 등록되지 않았어요!\n\n💡 내일이나 다른 평일 날짜를 선택해서"
+                " 미리 확인해 보세요 😊"
+            )
+        else:
+           raw_menu = data['mealServiceDietInfo'][1]['row'][0]['DDISH_NM']
       menu_items = raw_menu.split('<br/>')
 
       total_risk_score = 0
