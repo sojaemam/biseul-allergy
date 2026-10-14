@@ -5,7 +5,8 @@ import streamlit as st
 st.set_page_config(page_title="비슬고 급식 알레르기 케어", page_icon="🏫")
 
 MY_NEIS_KEY = '2706781616044e5bae5ed9590e87d93b'
-
+ATPT_OFCDC_SC_CODE = 'D10'  # 대구광역시교육청 코드
+SD_SCHUL_CODE = '7240453'     # 비슬고등학교 학교 코드
 ALLERGY_MAP = {
     '1': '난류(달걀)',
     '2': '우유',
