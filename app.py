@@ -1,3 +1,4 @@
+from datetime import datetime, timedelta
 import re
 import requests
 import streamlit as st
@@ -33,8 +34,6 @@ ALLERGY_MAP = {
 st.title('🏫 비슬고 맞춤형 급식 알레르기 케어 시스템')
 st.caption('알레르기 반응 강도를 선택하면 개인 맞춤 식단 위험 점수와 교내 실전 식사 가이드를 제공합니다.')
 
-from datetime import datetime, timedelta
-
 # 오늘 날짜를 구하고 주말일 경우 가장 가까운 평일(금요일)로 자동 설정
 today = datetime.now()
 weekday = today.weekday()  # 월:0 ~ 일:6
@@ -45,10 +44,11 @@ elif weekday == 6:  # 일요일
 else:
     target_date = today
 
-default_date_str = target_date.strftime('%Y%m%d')
+# 달력 위젯(st.date_input)으로 날짜 선택 기능 적용
+selected_date = st.date_input('조회 날짜 선택', value=target_date)
 
-# 날짜 입력창 생성 (자동 계산된 날짜를 기본값으로 지정)
-date_input = st.text_input('조회 날짜 (8자리)', value=default_date_str)
+# 나이스 API 규격인 8자리 문자열('YYYYMMDD')로 변환
+date_input = selected_date.strftime('%Y%m%d')
 
 col1, col2 = st.columns(2)
 
