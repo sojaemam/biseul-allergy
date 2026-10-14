@@ -63,13 +63,12 @@ if st.button('오늘의 급식 위험도 분석하기', type='primary'):
 
   url = 'https://open.neis.go.kr/hub/mealServiceDietInfo'
   params = {
-      'KEY': MY_NEIS_KEY.strip(),
-      'Type': 'json',
-      'ATPT_OFCDC_SC_CODE': 'D10',
-      'SD_SCHUL_CODE': '7240273',
-      'MLSV_YMD': date_input.strip(),
-  }
-
+    'KEY': MY_NEIS_KEY.strip(),
+    'Type': 'json',
+    'ATPT_OFCDC_SC_CODE': ATPT_OFCDC_SC_CODE,  # 변수 사용
+    'SD_SCHUL_CODE': SD_SCHUL_CODE,          # 변수 사용
+    'MLSV_YMD': date_input.strip(),
+}
   try:
     res = requests.get(url, params=params)
     data = res.json()
